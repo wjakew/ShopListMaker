@@ -99,41 +99,41 @@ public class main_window extends javax.swing.JFrame implements WindowListener {
             }
         });
         field_dodaj.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                field_dodajKeyTyped(evt);
-            }
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 field_dodajKeyPressed(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                field_dodajKeyTyped(evt);
+            }
         });
 
-        dodaj_button.setText("Dodaj");
+        dodaj_button.setText("Add");
         dodaj_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dodaj_buttonActionPerformed(evt);
             }
         });
 
-        usun_button.setText("Usun");
+        usun_button.setText("Delete");
         usun_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 usun_buttonActionPerformed(evt);
             }
         });
 
-        gotowe_button.setText("Gotowe");
+        gotowe_button.setText("Done");
         gotowe_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 gotowe_buttonActionPerformed(evt);
             }
         });
 
-        jLabel1.setText("Twoja Lista Zakupów:");
+        jLabel1.setText("Your shopping list:");
 
         menu_category_menu.setText("Menu");
 
         zapisz_liste_menu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.META_MASK));
-        zapisz_liste_menu.setText("Zapisz Liste");
+        zapisz_liste_menu.setText("Save list");
         zapisz_liste_menu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 zapisz_liste_menuActionPerformed(evt);
@@ -142,7 +142,7 @@ public class main_window extends javax.swing.JFrame implements WindowListener {
         menu_category_menu.add(zapisz_liste_menu);
 
         otworz_liste_menu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.META_MASK));
-        otworz_liste_menu.setText("Otwórz Liste");
+        otworz_liste_menu.setText("Open list");
         otworz_liste_menu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 otworz_liste_menuActionPerformed(evt);
@@ -151,7 +151,7 @@ public class main_window extends javax.swing.JFrame implements WindowListener {
         menu_category_menu.add(otworz_liste_menu);
 
         wyczysc_menu_item.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_W, java.awt.event.InputEvent.META_MASK));
-        wyczysc_menu_item.setText("Wyczyść Liste");
+        wyczysc_menu_item.setText("Clear list");
         wyczysc_menu_item.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 wyczysc_menu_itemActionPerformed(evt);
@@ -161,10 +161,10 @@ public class main_window extends javax.swing.JFrame implements WindowListener {
 
         jMenuBar1.add(menu_category_menu);
 
-        jMenu1.setText("Akcje");
+        jMenu1.setText("Actions");
 
         usun_element_jmenu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.META_MASK));
-        usun_element_jmenu.setText("Usun Element");
+        usun_element_jmenu.setText("Delete Element");
         usun_element_jmenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 usun_element_jmenuActionPerformed(evt);
@@ -173,7 +173,7 @@ public class main_window extends javax.swing.JFrame implements WindowListener {
         jMenu1.add(usun_element_jmenu);
 
         generuj_wynik_jmenu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.META_MASK));
-        generuj_wynik_jmenu.setText("Generuj Wynik");
+        generuj_wynik_jmenu.setText("Generate result");
         generuj_wynik_jmenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 generuj_wynik_jmenuActionPerformed(evt);
@@ -183,9 +183,9 @@ public class main_window extends javax.swing.JFrame implements WindowListener {
 
         jMenuBar1.add(jMenu1);
 
-        opcje_category_menu.setText("Opcje");
+        opcje_category_menu.setText("Options");
 
-        informacje_menu.setText("Informacje");
+        informacje_menu.setText("Information");
         informacje_menu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 informacje_menuActionPerformed(evt);
@@ -193,7 +193,7 @@ public class main_window extends javax.swing.JFrame implements WindowListener {
         });
         opcje_category_menu.add(informacje_menu);
 
-        jMenuItem1.setText("Pomoc");
+        jMenuItem1.setText("Help");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
@@ -202,7 +202,7 @@ public class main_window extends javax.swing.JFrame implements WindowListener {
         opcje_category_menu.add(jMenuItem1);
 
         ustawienia_jMenu.setSelected(true);
-        ustawienia_jMenu.setText("Ustawienia");
+        ustawienia_jMenu.setText("Settings");
         ustawienia_jMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ustawienia_jMenuActionPerformed(evt);
@@ -227,9 +227,9 @@ public class main_window extends javax.swing.JFrame implements WindowListener {
                 .addComponent(gotowe_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addComponent(field_dodaj, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(field_dodaj)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(usun_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(dodaj_button, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE))
@@ -247,11 +247,14 @@ public class main_window extends javax.swing.JFrame implements WindowListener {
                 .addGap(5, 5, 5)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(field_dodaj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dodaj_button))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(usun_button)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(dodaj_button)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(usun_button))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(field_dodaj)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(gotowe_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())

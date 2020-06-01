@@ -51,24 +51,32 @@ public class generacja_window extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         zamknij = new javax.swing.JButton();
         copy = new javax.swing.JButton();
+        send_via_email_button = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jScrollPane1.setViewportView(panel_tekstowy);
 
-        jLabel1.setText("Tak prezentuje się Twoja lista zakupów:");
+        jLabel1.setText("That's how looks your shopping list:");
 
-        zamknij.setText("Zamknij");
+        zamknij.setText("Close");
         zamknij.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 zamknijActionPerformed(evt);
             }
         });
 
-        copy.setText("Kopiuj do schowka");
+        copy.setText("Copy to clipboard");
         copy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 copyActionPerformed(evt);
+            }
+        });
+
+        send_via_email_button.setText("Send via e-mail");
+        send_via_email_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                send_via_email_buttonActionPerformed(evt);
             }
         });
 
@@ -78,13 +86,14 @@ public class generacja_window extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(39, 39, 39)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel1)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(copy)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(copy, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
-                        .addComponent(zamknij, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(zamknij, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 335, Short.MAX_VALUE)
+                    .addComponent(send_via_email_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(45, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -98,6 +107,8 @@ public class generacja_window extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(copy)
                     .addComponent(zamknij))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(send_via_email_button)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -117,12 +128,17 @@ public class generacja_window extends javax.swing.JDialog {
         System.exit(0);
     }//GEN-LAST:event_zamknijActionPerformed
 
+    private void send_via_email_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_send_via_email_buttonActionPerformed
+        JOptionPane.showMessageDialog(this, "This function will be added in the future update");
+    }//GEN-LAST:event_send_via_email_buttonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton copy;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextPane panel_tekstowy;
+    private javax.swing.JButton send_via_email_button;
     private javax.swing.JButton zamknij;
     // End of variables declaration//GEN-END:variables
 }

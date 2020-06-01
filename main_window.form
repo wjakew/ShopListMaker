@@ -14,7 +14,7 @@
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
                   <KeyStroke key="Meta+S"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Zapisz Liste"/>
+                <Property name="text" type="java.lang.String" value="Save list"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="zapisz_liste_menuActionPerformed"/>
@@ -25,7 +25,7 @@
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
                   <KeyStroke key="Meta+O"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Otw&#xf3;rz Liste"/>
+                <Property name="text" type="java.lang.String" value="Open list"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="otworz_liste_menuActionPerformed"/>
@@ -36,7 +36,7 @@
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
                   <KeyStroke key="Meta+W"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Wyczy&#x15b;&#x107; Liste"/>
+                <Property name="text" type="java.lang.String" value="Clear list"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="wyczysc_menu_itemActionPerformed"/>
@@ -46,7 +46,7 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Akcje"/>
+            <Property name="text" type="java.lang.String" value="Actions"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="usun_element_jmenu">
@@ -54,7 +54,7 @@
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
                   <KeyStroke key="Meta+R"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Usun Element"/>
+                <Property name="text" type="java.lang.String" value="Delete Element"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="usun_element_jmenuActionPerformed"/>
@@ -65,7 +65,7 @@
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
                   <KeyStroke key="Meta+G"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Generuj Wynik"/>
+                <Property name="text" type="java.lang.String" value="Generate result"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="generuj_wynik_jmenuActionPerformed"/>
@@ -75,12 +75,12 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="opcje_category_menu">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Opcje"/>
+            <Property name="text" type="java.lang.String" value="Options"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="informacje_menu">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Informacje"/>
+                <Property name="text" type="java.lang.String" value="Information"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="informacje_menuActionPerformed"/>
@@ -88,7 +88,7 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Pomoc"/>
+                <Property name="text" type="java.lang.String" value="Help"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem1ActionPerformed"/>
@@ -97,7 +97,7 @@
             <MenuItem class="javax.swing.JCheckBoxMenuItem" name="ustawienia_jMenu">
               <Properties>
                 <Property name="selected" type="boolean" value="true"/>
-                <Property name="text" type="java.lang.String" value="Ustawienia"/>
+                <Property name="text" type="java.lang.String" value="Settings"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ustawienia_jMenuActionPerformed"/>
@@ -142,9 +142,9 @@
               <EmptySpace max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-              <Component id="field_dodaj" min="-2" pref="145" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="field_dodaj" max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" max="-2" attributes="0">
                   <Component id="usun_button" max="32767" attributes="0"/>
                   <Component id="dodaj_button" pref="77" max="32767" attributes="0"/>
@@ -166,12 +166,17 @@
               <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="305" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="field_dodaj" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="dodaj_button" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="dodaj_button" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="usun_button" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="3" pref="3" max="-2" attributes="0"/>
+                      <Component id="field_dodaj" max="32767" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="usun_button" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="gotowe_button" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
@@ -202,13 +207,13 @@
     <Component class="javax.swing.JTextField" name="field_dodaj">
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="field_dodajActionPerformed"/>
-        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="field_dodajKeyTyped"/>
         <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="field_dodajKeyPressed"/>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="field_dodajKeyTyped"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="dodaj_button">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Dodaj"/>
+        <Property name="text" type="java.lang.String" value="Add"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dodaj_buttonActionPerformed"/>
@@ -216,7 +221,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="usun_button">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Usun"/>
+        <Property name="text" type="java.lang.String" value="Delete"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="usun_buttonActionPerformed"/>
@@ -224,7 +229,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="gotowe_button">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Gotowe"/>
+        <Property name="text" type="java.lang.String" value="Done"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="gotowe_buttonActionPerformed"/>
@@ -232,7 +237,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Twoja Lista Zakup&#xf3;w:"/>
+        <Property name="text" type="java.lang.String" value="Your shopping list:"/>
       </Properties>
     </Component>
   </SubComponents>

@@ -49,23 +49,25 @@ public class ustawienia_window extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         wyslij_slownik_button = new javax.swing.JButton();
         podglad_button = new javax.swing.JButton();
+        merge_dictionaries_button = new javax.swing.JButton();
+        database_login_button = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setText("Twoje Imie:");
+        jLabel1.setText("Your Name");
 
         imie_label.setText("jLabel2");
 
-        jLabel2.setText("Ścieżka Słownika:");
+        jLabel2.setText("Path of dictionary file");
 
-        mod_imie_button.setText("Modyfikuj..");
+        mod_imie_button.setText("Edit");
         mod_imie_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mod_imie_buttonActionPerformed(evt);
             }
         });
 
-        mod_sciezka_button.setText("Modyfikuj..");
+        mod_sciezka_button.setText("Edit");
         mod_sciezka_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mod_sciezka_buttonActionPerformed(evt);
@@ -73,19 +75,28 @@ public class ustawienia_window extends javax.swing.JDialog {
         });
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel3.setText("Ustawienia SLM");
+        jLabel3.setText("SLM SETTINGS");
 
-        wyslij_slownik_button.setText("Wyślij swój słownik");
+        wyslij_slownik_button.setText("Send your dictionary");
         wyslij_slownik_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 wyslij_slownik_buttonActionPerformed(evt);
             }
         });
 
-        podglad_button.setText("Podgląd");
+        podglad_button.setText("Show path");
         podglad_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 podglad_buttonActionPerformed(evt);
+            }
+        });
+
+        merge_dictionaries_button.setText("Merge dictionaries");
+
+        database_login_button.setText("Login to database");
+        database_login_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                database_login_buttonActionPerformed(evt);
             }
         });
 
@@ -94,31 +105,33 @@ public class ustawienia_window extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel1))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(podglad_button))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
-                        .addComponent(imie_label)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(mod_imie_button, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(mod_sciezka_button, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel2)
+                                .addComponent(jLabel1))
+                            .addGap(18, 18, 18)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(podglad_button)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(mod_sciezka_button, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(imie_label)
+                                    .addGap(31, 31, 31)
+                                    .addComponent(mod_imie_button, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(wyslij_slownik_button, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(merge_dictionaries_button, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(database_login_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(wyslij_slownik_button, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(87, 87, 87))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(83, 83, 83))))
+                .addComponent(jLabel3)
+                .addGap(90, 90, 90))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -135,16 +148,20 @@ public class ustawienia_window extends javax.swing.JDialog {
                     .addComponent(jLabel2)
                     .addComponent(podglad_button)
                     .addComponent(mod_sciezka_button))
-                .addGap(31, 31, 31)
-                .addComponent(wyslij_slownik_button)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addComponent(database_login_button)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(wyslij_slownik_button)
+                    .addComponent(merge_dictionaries_button))
+                .addGap(27, 27, 27))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void mod_imie_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mod_imie_buttonActionPerformed
-        String nowe_imie = JOptionPane.showInputDialog("Podaj nowe imie:");
+        String nowe_imie = JOptionPane.showInputDialog("Type your name:");
         try {
             program_info.to_pass.change_imie(nowe_imie);
         } catch (FileNotFoundException ex) {
@@ -155,7 +172,7 @@ public class ustawienia_window extends javax.swing.JDialog {
 
     private void mod_sciezka_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mod_sciezka_buttonActionPerformed
         JFileChooser myFileChooser = new JFileChooser();
-        myFileChooser.setDialogTitle("Zmiana lokalizacji pliku slownikowego");
+        myFileChooser.setDialogTitle("You changed the dictionary path");
 
         if(myFileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION){
             String path = myFileChooser.getSelectedFile().getAbsolutePath();
@@ -176,15 +193,21 @@ public class ustawienia_window extends javax.swing.JDialog {
     }//GEN-LAST:event_podglad_buttonActionPerformed
 
     private void wyslij_slownik_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_wyslij_slownik_buttonActionPerformed
-        JOptionPane.showMessageDialog(this, "Ta funkcja zostanie dodana w wersji v1.3.1");
+        JOptionPane.showMessageDialog(this, "This function will be added in the future update");
     }//GEN-LAST:event_wyslij_slownik_buttonActionPerformed
+
+    private void database_login_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_database_login_buttonActionPerformed
+        JOptionPane.showMessageDialog(this, "This function will be added in the future update");
+    }//GEN-LAST:event_database_login_buttonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton database_login_button;
     private javax.swing.JLabel imie_label;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JButton merge_dictionaries_button;
     private javax.swing.JButton mod_imie_button;
     private javax.swing.JButton mod_sciezka_button;
     private javax.swing.JButton podglad_button;

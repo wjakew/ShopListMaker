@@ -39,7 +39,7 @@ public class ShopListMaker {
         else{
         if(!new File("config_file.txt").exists()) { 
                 JFileChooser myFileChooser = new JFileChooser();
-                myFileChooser.setDialogTitle("Brak Pliku Słownikowego - Wybierz go");
+                myFileChooser.setDialogTitle("No dictionary file. - Choose it:");
 
                 if(myFileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION){
                     String path = myFileChooser.getSelectedFile().getAbsolutePath();
@@ -54,14 +54,14 @@ public class ShopListMaker {
 
                         act.lg=1;
                         
-                        String imie = JOptionPane.showInputDialog("Poznajmy sie! Podaj swoje imie:");
+                        String imie = JOptionPane.showInputDialog("Hi! What's your name?:");
                         act_config.make(imie, path);
                         act.add_config(act_config);
-                        JOptionPane.showMessageDialog(null,"Zalecamy restart aplikacji");
+                        JOptionPane.showMessageDialog(null,"Restart the app");
                         new main_window(act);
                     }
                     else{
-                        JOptionPane.showMessageDialog(myFileChooser, "Niepoparawny plik slownikowy");
+                        JOptionPane.showMessageDialog(myFileChooser, "Error while loading dict file");
                         System.exit(0);
                     }       
                 }
@@ -85,9 +85,9 @@ public class ShopListMaker {
                     new main_window(act);
                 }
                 else{
-                    JOptionPane.showMessageDialog(null, "Brak pliku slownikowego.");
+                    JOptionPane.showMessageDialog(null, "Error while loading dict file");
                     JFileChooser myFileChooser = new JFileChooser();
-                    myFileChooser.setDialogTitle("Podaj lokalizacje pliku");
+                    myFileChooser.setDialogTitle("Choose dictionary directory:");
 
                     if(myFileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION){
                         String path = myFileChooser.getSelectedFile().getAbsolutePath();
@@ -100,7 +100,7 @@ public class ShopListMaker {
                             }
                         }
                     }
-                    JOptionPane.showMessageDialog(null,"Zmieniono - uruchom ponownie");
+                    JOptionPane.showMessageDialog(null,"Changed - restart the program");
                 }
 
                 } 
