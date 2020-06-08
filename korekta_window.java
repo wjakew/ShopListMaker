@@ -44,14 +44,15 @@ public class korekta_window extends javax.swing.JDialog {
     void refresh_list(){
         model_listy = new DefaultListModel<String>();
         
-        model_listy.addElement("Warzywa i Owoce");
-        model_listy.addElement("Napoje");
-        model_listy.addElement("Przyprawy");
-        model_listy.addElement("Pieczywo");
-        model_listy.addElement("Przekaski");
+        model_listy.addElement("Groceries");
+        model_listy.addElement("Drinks");
+        model_listy.addElement("Spices");
+        model_listy.addElement("Pastry");
+        model_listy.addElement("Snacks");
         model_listy.addElement("Chemia");
-        model_listy.addElement("Nabial");
-        model_listy.addElement("Zdrowe Zywienie");
+        model_listy.addElement("Diary");
+        model_listy.addElement("Healthy food");
+        model_listy.addElement("Other");
     }   
     
     void refresh_koszyk(){
@@ -153,7 +154,7 @@ public class korekta_window extends javax.swing.JDialog {
         String kategoria_sel = kategoria.getSelectedValue();
         
         if(koszyk_sel.equals("") || kategoria_sel.equals("")){
-            JOptionPane.showMessageDialog(this, "Niepoprawne zaznaczenie");
+            JOptionPane.showMessageDialog(this, "Wrong selection");
         }
         
         else{//tutaj wchodzimy do poprawnego kodu nadania kategorii
@@ -162,7 +163,7 @@ public class korekta_window extends javax.swing.JDialog {
             DictReader dr = new DictReader("",info);
             //bedziemy uczyc slownik przy kazdym nadawaniu kategorii nowych slow kluczowych
             
-            if(kategoria_sel.equals("Warzywa i Owoce")){
+            if(kategoria_sel.equals("Groceries")){
                 info.act_cart.warzywaiowoce.add(koszyk_sel);
                 try {
                     dr.dodaj("%warzywaiowoce", koszyk_sel);
@@ -170,7 +171,7 @@ public class korekta_window extends javax.swing.JDialog {
                     Logger.getLogger(korekta_window.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            if(kategoria_sel.equals("Napoje")){
+            if(kategoria_sel.equals("Drinks")){
                 info.act_cart.napoje.add(koszyk_sel);
                 try {
                     dr.dodaj("%napoje", koszyk_sel);
@@ -178,7 +179,7 @@ public class korekta_window extends javax.swing.JDialog {
                     Logger.getLogger(korekta_window.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            if(kategoria_sel.equals("Przyprawy")){
+            if(kategoria_sel.equals("Spieces")){
                 info.act_cart.przyprawy.add(koszyk_sel);
                 try {
                     dr.dodaj("%przyprawy", koszyk_sel);
@@ -186,7 +187,7 @@ public class korekta_window extends javax.swing.JDialog {
                     Logger.getLogger(korekta_window.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            if(kategoria_sel.equals("Pieczywo")){
+            if(kategoria_sel.equals("Pastry")){
                 info.act_cart.pieczywo.add(koszyk_sel);
                 try {
                     dr.dodaj("%pieczywo", koszyk_sel);
@@ -194,7 +195,7 @@ public class korekta_window extends javax.swing.JDialog {
                     Logger.getLogger(korekta_window.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            if(kategoria_sel.equals("Przekaski")){
+            if(kategoria_sel.equals("Snacks")){
                 info.act_cart.przekaski.add(koszyk_sel);
                 try {
                     dr.dodaj("%przekaski", koszyk_sel);
@@ -210,7 +211,7 @@ public class korekta_window extends javax.swing.JDialog {
                     Logger.getLogger(korekta_window.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            if(kategoria_sel.equals("Nabial")){
+            if(kategoria_sel.equals("Diary")){
                 info.act_cart.nabial.add(koszyk_sel);
                 try {
                     dr.dodaj("%nabial", koszyk_sel);
@@ -218,7 +219,7 @@ public class korekta_window extends javax.swing.JDialog {
                     Logger.getLogger(korekta_window.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            if(kategoria_sel.equals("Zdrowe Zywienie")){
+            if(kategoria_sel.equals("Healhy food")){
                 info.act_cart.zdrowezywienie.add(koszyk_sel);
                 try {
                     dr.dodaj("%zdrowezywienie", koszyk_sel);
@@ -226,9 +227,17 @@ public class korekta_window extends javax.swing.JDialog {
                     Logger.getLogger(korekta_window.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
+            if(kategoria_sel.equals("Other")){
+                info.act_cart.zdrowezywienie.add(koszyk_sel);
+                try {
+                    dr.dodaj("%inne", koszyk_sel);
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(korekta_window.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
             info.act_cart.brak_kategorii.remove(koszyk_sel);
             if(info.act_cart.brak_kategorii.isEmpty()){
-                JOptionPane.showMessageDialog(this, "Poprawnie nadano kategorie");
+                JOptionPane.showMessageDialog(this, "Categories have been added");
                 setVisible(false);
                 dispose();
             }

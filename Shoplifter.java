@@ -31,6 +31,7 @@ public class Shoplifter {
     ArrayList<String> chemia;
     ArrayList<String> zdrowezywienie;
     ArrayList<String> nabial;
+    ArrayList<String> inne;
     
     ArrayList<String> brak_kategorii;
     
@@ -49,7 +50,7 @@ public class Shoplifter {
         chemia = new ArrayList<>();
         zdrowezywienie = new ArrayList<>();
         nabial = new ArrayList<>();
-        
+        inne = new ArrayList<>();
         
         brak_kategorii = new ArrayList<>();
   
@@ -70,6 +71,7 @@ public class Shoplifter {
         chemia = new ArrayList<>();
         zdrowezywienie = new ArrayList<>();
         nabial = new ArrayList<>();
+        inne = new ArrayList<>();
         
         brak_kategorii = new ArrayList<>();
   
@@ -151,6 +153,9 @@ public class Shoplifter {
             if(znalezione_klucze.get(0).equals("%nabial")){
                 nabial.add(element);
             } 
+            if(znalezione_klucze.get(0).equals("%inne")){
+                nabial.add(element);
+            }
             
         }
           
@@ -196,6 +201,11 @@ public class Shoplifter {
         for(String szukaj: nabial){
             if(szukaj.equals(nazwa_elementu)){
                 return nabial;
+            }
+        }
+        for(String szukaj: inne){
+            if(szukaj.equals(nazwa_elementu)){
+                return inne;
             }
         }
         return null;
@@ -272,6 +282,16 @@ public class Shoplifter {
                 return false;
             }
         }
+        if(gdzie==7){
+            if(szukaj(nazwa_elementu)!=null){
+                szukaj(nazwa_elementu).remove(nazwa_elementu);
+                inne.add(nazwa_elementu);
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
         return false;
     }
     void show_act(){//dokoncz
@@ -285,7 +305,7 @@ public class Shoplifter {
         String to_ret = "";
         
         if(!warzywaiowoce.isEmpty()){
-            to_ret = to_ret +"Twoje warzywa i owoce:\n";
+            to_ret = to_ret +"Your groceries:\n";
             for(String ac: warzywaiowoce){
                 to_ret = to_ret + ac + "\n";
                 }
@@ -293,7 +313,7 @@ public class Shoplifter {
         }
         
         if(!napoje.isEmpty()){
-            to_ret = to_ret +"Twoje napoje:\n";
+            to_ret = to_ret +"Drinks:\n";
             for(String ac: napoje){
                 to_ret = to_ret + ac + "\n";
                 }
@@ -301,7 +321,7 @@ public class Shoplifter {
         }
         
         if(!przyprawy.isEmpty()){
-            to_ret = to_ret +"Twoje przyprawy:\n";
+            to_ret = to_ret +"Spices:\n";
             for(String ac: przyprawy){
                 to_ret = to_ret + ac + "\n";
                 }
@@ -309,7 +329,7 @@ public class Shoplifter {
         }
         
         if(!pieczywo.isEmpty()){
-            to_ret = to_ret +"Twoje pieczywo:\n";
+            to_ret = to_ret +"Pastry:\n";
             for(String ac: pieczywo){
                 to_ret = to_ret + ac + "\n";
                 }
@@ -317,14 +337,14 @@ public class Shoplifter {
         }
         
         if(!przekaski.isEmpty()){
-            to_ret = to_ret +"Twoje przekaski:\n";
+            to_ret = to_ret +"Snacks:\n";
             for(String ac: przekaski){
                 to_ret = to_ret + ac + "\n";
                 }
         }
         to_ret +="\n";
         if(!chemia.isEmpty()){
-            to_ret = to_ret +"Twoje artykuly chemiczne:\n";
+            to_ret = to_ret +"Cleaning products and cosmetics:\n";
             for(String ac: chemia){
                 to_ret = to_ret + ac + "\n";
                 }
@@ -332,7 +352,7 @@ public class Shoplifter {
         }
         
         if(!zdrowezywienie.isEmpty()){
-            to_ret = to_ret +"Twoje artykuly ze zdrowego zywienia :\n";
+            to_ret = to_ret +"Healthy food:\n";
             for(String ac: zdrowezywienie){
                 to_ret = to_ret + ac + "\n";
                 }
@@ -340,8 +360,15 @@ public class Shoplifter {
         }
         
         if(!nabial.isEmpty()){
-            to_ret = to_ret +"Twoje nabial :\n";
+            to_ret = to_ret +"Diary: \n";
             for(String ac: nabial){
+                to_ret = to_ret + ac + "\n";
+                }
+            to_ret +="\n";
+        }
+        if(!inne.isEmpty()){
+            to_ret = to_ret +"Other: \n";
+            for(String ac: inne){
                 to_ret = to_ret + ac + "\n";
                 }
             to_ret +="\n";

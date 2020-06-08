@@ -11,7 +11,7 @@ package shoplistmaker;
  */
 public class InfoHandler {
     
-    String version = "v.1.3";
+    String version = "v.1.3.2";
     Shoplifter act_cart;
     int lg = 0;
     String dict_path = "";

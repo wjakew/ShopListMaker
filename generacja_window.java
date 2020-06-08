@@ -7,6 +7,10 @@ package shoplistmaker;
 
 import java.awt.datatransfer.*;
 import java.awt.Toolkit;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.mail.MessagingException;
 import javax.swing.JOptionPane;
 
 /**
@@ -33,7 +37,7 @@ public class generacja_window extends javax.swing.JDialog {
     
     String get_list(){
         String ret = panel_tekstowy.getText();
-        ret = ret +"\n"+"Milych Zakupow zycza tworcy aplikacji ShopListMaker\n";
+        ret = ret +"\n"+"Happy Shopping from SLM Team\n";
         return ret;
     }
 
@@ -119,17 +123,28 @@ public class generacja_window extends javax.swing.JDialog {
         StringSelection stringSelection = new StringSelection(info.act_cart.make_list());
         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
         clipboard.setContents(stringSelection, null);
-        JOptionPane.showMessageDialog(this, "Lista zostala skopiowana do schowka.");
+        JOptionPane.showMessageDialog(this, "Your list was copied to clipboard.");
         System.exit(0);
     }//GEN-LAST:event_copyActionPerformed
 
     private void zamknijActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zamknijActionPerformed
-        JOptionPane.showMessageDialog(this, "Dziekujemy za skorzystanie z SLM");
+        JOptionPane.showMessageDialog(this, "Thank you for using SLM");
         System.exit(0);
     }//GEN-LAST:event_zamknijActionPerformed
 
     private void send_via_email_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_send_via_email_buttonActionPerformed
-        JOptionPane.showMessageDialog(this, "This function will be added in the future update");
+        String email = JOptionPane.showInputDialog("Type e-mail address:");
+        if ( email.contains("@") ){
+            try {
+                MailSender ms = new MailSender(info,email);
+                ms.run();
+                JOptionPane.showMessageDialog(this, "List sent");
+            } catch (MessagingException ex) {
+                Logger.getLogger(generacja_window.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(generacja_window.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }//GEN-LAST:event_send_via_email_buttonActionPerformed
 
 

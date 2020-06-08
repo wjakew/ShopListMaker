@@ -42,7 +42,7 @@ public class main_window extends javax.swing.JFrame implements WindowListener {
     InfoHandler program_info;
     
     public main_window(InfoHandler info) {
-        super("SLM "+info.version);
+        super("ShopListMaker");
         program_info = info;
         lista_model = new DefaultListModel<>();
         lista_zakupow = new ArrayList<>();
@@ -220,24 +220,22 @@ public class main_window extends javax.swing.JFrame implements WindowListener {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(gotowe_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(field_dodaj)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(usun_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(dodaj_button, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE))
-                .addGap(29, 29, 29))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(field_dodaj)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(usun_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(dodaj_button, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE))
+                        .addGap(29, 29, 29))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(gotowe_button, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -254,17 +252,17 @@ public class main_window extends javax.swing.JFrame implements WindowListener {
                         .addComponent(usun_button))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(3, 3, 3)
-                        .addComponent(field_dodaj)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(gotowe_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                        .addComponent(field_dodaj, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)))
+                .addGap(18, 18, 18)
+                .addComponent(gotowe_button, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)
+                .addGap(6, 6, 6))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void informacje_menuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_informacje_menuActionPerformed
-        JOptionPane.showMessageDialog(this, "by Jakub Wawak 2018 "+program_info.version);
+        JOptionPane.showMessageDialog(this, "by Jakub Wawak 2020 "+program_info.version);
     }//GEN-LAST:event_informacje_menuActionPerformed
 
     private void zapisz_liste_menuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zapisz_liste_menuActionPerformed
@@ -274,7 +272,7 @@ public class main_window extends javax.swing.JFrame implements WindowListener {
                 File file = fileChooser.getSelectedFile();
                 try {
                     Files.write(Paths.get(file.getAbsolutePath()), lista_zakupow, Charset.forName("UTF-8"));
-                    JOptionPane.showMessageDialog(this, "Zapisano liste");
+                    JOptionPane.showMessageDialog(this, "List saved");
                     lista_zakupow.clear();
                     prepare_list_model();
                 } catch (IOException ex) {
@@ -282,11 +280,11 @@ public class main_window extends javax.swing.JFrame implements WindowListener {
                 }    
             }
             else{
-                 JOptionPane.showMessageDialog(this, "Wybierz poprawny plik");
+                 JOptionPane.showMessageDialog(this, "Choose correct file");
                     }
         }
         else{
-            JOptionPane.showMessageDialog(this, "Lista pusta");
+            JOptionPane.showMessageDialog(this, "List is empty");
         }
         
     }//GEN-LAST:event_zapisz_liste_menuActionPerformed
@@ -294,7 +292,7 @@ public class main_window extends javax.swing.JFrame implements WindowListener {
     private void dodaj_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dodaj_buttonActionPerformed
         String to_add = field_dodaj.getText();
         if(to_add.equals("")){
-            JOptionPane.showMessageDialog(this, "Pole puste");
+            JOptionPane.showMessageDialog(this, "There is nothing to add!");
         }
         else{
             lista_zakupow.add(to_add);
@@ -310,7 +308,7 @@ public class main_window extends javax.swing.JFrame implements WindowListener {
             prepare_list_model();
         }
         else{
-            JOptionPane.showMessageDialog(this, "Nie zostal zaznaczony zaden element");
+            JOptionPane.showMessageDialog(this, "No element has been selected");
         }
         
     }//GEN-LAST:event_usun_buttonActionPerformed
@@ -347,12 +345,12 @@ public class main_window extends javax.swing.JFrame implements WindowListener {
             new show_window(this,true,program_info);
             }
             else{
-                JOptionPane.showMessageDialog(this, "Lista zakupow jest pusta");
+                JOptionPane.showMessageDialog(this, "Shopping list is empty");
             }
         }
         else{
             JFileChooser myFileChooser = new JFileChooser();
-            myFileChooser.setDialogTitle("Zmiana lokalizacji pliku slownikowego");
+            myFileChooser.setDialogTitle("File localization was changed");
 
             if(myFileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION){
                 String path = myFileChooser.getSelectedFile().getAbsolutePath();
@@ -373,7 +371,7 @@ public class main_window extends javax.swing.JFrame implements WindowListener {
                 new show_window(this,true,program_info);
                 }
             else{
-                JOptionPane.showMessageDialog(this, "Lista zakupow jest pusta");
+                JOptionPane.showMessageDialog(this, "Shopping list is empty");
             }
         }
         
@@ -391,7 +389,7 @@ public class main_window extends javax.swing.JFrame implements WindowListener {
         if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
             String to_add = field_dodaj.getText();
             if(to_add.equals("")){
-                JOptionPane.showMessageDialog(this, "Pole puste");
+                JOptionPane.showMessageDialog(this, "There is nothing to add!");
             }
             else{
                 lista_zakupow.add(to_add);
@@ -408,7 +406,7 @@ public class main_window extends javax.swing.JFrame implements WindowListener {
             prepare_list_model();
         }
         else{
-            JOptionPane.showMessageDialog(this, "Nie zostal zaznaczony zaden element");
+            JOptionPane.showMessageDialog(this, "No element has been selected");
         }
     }//GEN-LAST:event_usun_element_jmenuActionPerformed
 
@@ -418,7 +416,7 @@ public class main_window extends javax.swing.JFrame implements WindowListener {
             new show_window(this,true,program_info);
         }
         else{
-            JOptionPane.showMessageDialog(this, "Lista zakupow jest pusta");
+            JOptionPane.showMessageDialog(this, "Shopping list is empty");
         }
     }//GEN-LAST:event_generuj_wynik_jmenuActionPerformed
 

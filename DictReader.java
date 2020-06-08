@@ -35,7 +35,7 @@ public class DictReader {
     private ArrayList<HashSet> wartosci2 = new ArrayList<>();
     
     //poszczegolna linia slownika, kompletnie nie wazne
-    private ArrayList<String> L_zrozumianeslowa = new ArrayList<String>();
+    public ArrayList<String> L_zrozumianeslowa = new ArrayList<String>();
     
     //lista zawierajace wszystkie najblizsze slowa do slowa szukanego
     //metoda szukanie_fragmentaryczne
