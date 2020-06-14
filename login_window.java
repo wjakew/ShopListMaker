@@ -46,6 +46,7 @@ public class login_window extends javax.swing.JDialog {
         login_button = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Login to SLM Database!");
 
         jLabel1.setText("Password:");
 

@@ -10,7 +10,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *Object for maintaining database connection
@@ -31,7 +31,7 @@ public class Database {
     // main constructor
     Database (){
         try{
-            con = DriverManager.getConnection("jdbc:mysql://localhost/programnote_database?" +
+            con = DriverManager.getConnection("jdbc:mysql://localhost/shoplistmaker_database?" +
                                    "user=root&password=password");
             System.out.println("Connected: "+con.toString());
             connected = true;
@@ -106,5 +106,180 @@ public class Database {
         logged_as_user = false;
         user_id = -1;
         user_login = null;
+    }
+    /**
+     * Database.get_dictionary_id()
+     * @return int
+     * @throws SQLException
+     * Returns id of the user dictionary, -1 if not exist
+     */
+    int get_dictionary_id() throws SQLException{
+        String query = "SELECT * FROM DICTIONARY_USER where user_id = ?";
+        PreparedStatement ps = con.prepareStatement(query);
+        ps.setInt(1, user_id);
+        ResultSet rs = ps.executeQuery();
+        
+        if ( rs.next() ){
+            return rs.getInt("dictionary_id");
+        }
+        return -1;
+    }
+    
+    /**
+     * Database.get_category_id(String key)
+     * @param key
+     * @return Integer
+     * @throws SQLException
+     * Function for getting category id
+     */
+    int get_category_id(String key) throws SQLException{
+        String query = "SELECT category_id from CATEGORY where category_name = ?";
+        PreparedStatement ps = con.prepareStatement(query);
+        ps.setString(1,key);
+        ResultSet rs = ps.executeQuery();
+        
+        if( rs.next() ){
+            return rs.getInt("category_id");
+        }
+        return -1;
+    }
+    /**
+     * Database.add_to_main_storage(String key,Sting value)
+     * @param key
+     * @param value
+     * @return boolean
+     * @throws SQLException
+     * Function for adding to main storage on the database with checking on duplicates
+     */
+    boolean add_to_main_storage(String key,String value) throws SQLException{
+        int category_id = get_category_id(key);
+        String query = "INSERT INTO MAIN_STORAGE (user_id, category_id,main_name) \n" +
+                       "SELECT ?,?,?\n" +
+                       "WHERE NOT EXISTS (Select `main_name` From `MAIN_STORAGE` WHERE `main_name` = ?) LIMIT 1;";
+        
+        PreparedStatement ps = con.prepareStatement(query);
+        ps.setString(1,Integer.toString(user_id));
+        ps.setString(2,Integer.toString(category_id));
+        ps.setString(3,value);
+        ps.setString(4,value);
+        System.out.println("QUERY: "+ps.toString());
+        try{
+            ps.execute();
+            return true;
+        }catch(SQLException e){
+            System.out.println(e.toString());
+            return false;
+        }
+    }
+    /**
+     * Database.add_element(String key,String value,int dictionary_id,String note)
+     * @param key
+     * @param value
+     * @param dictionary_id
+     * @param note
+     * @return boolean
+     * @throws SQLException 
+     * Function adds elements to the database
+     */
+    boolean add_element(String key,String value,int dictionary_id,String note) throws SQLException{
+        
+        int category_id = get_category_id(key);
+        
+        String query = "INSERT INTO ELEMENT (category_id,user_id,dictionary_id,element_name,element_note,element_valid)\n" +
+                       "SELECT ?,?,?,?,?,?\n" +
+                       "WHERE NOT EXISTS (Select `element_name` From `ELEMENT` WHERE `element_name` =?) LIMIT 1;";
+        PreparedStatement ps = con.prepareStatement(query);
+        ps.setString(1, Integer.toString(category_id));
+        ps.setString(2, Integer.toString(user_id));
+        ps.setString(3, Integer.toString(dictionary_id));
+        ps.setString(4, value);
+        ps.setString(5, note);
+        ps.setString(6, Integer.toString(1));
+        ps.setString(7, value);
+        try{
+            ps.execute();
+            add_to_main_storage(key,value);
+            return true;
+        }catch(SQLException e){
+            System.out.println(e.toString());
+            return false;
+        }
+    }
+    /**
+     * Database.get_amount_of_keys()
+     * @return Integer
+     * @throws SQLException
+     * Returns number of values
+     */
+    int get_amount_of_values() throws SQLException{
+        String query = "SELECT COUNT(*)\n" +
+                       "FROM ELEMENT where user_id = ?;";
+        PreparedStatement ps = con.prepareStatement(query);
+        ps.setInt(1,user_id);
+        ResultSet rs = ps.executeQuery();
+        
+        if ( rs.next() ){
+            return rs.getInt("COUNT(*)");
+        }
+        return 0;
+    }
+    /**
+     * Database.update_dictionary_date()
+     * @throws SQLException 
+     * Updates date of the dictionary update
+     */
+    void update_dictionary_date() throws SQLException{
+        Date ac = new Date();
+        String query = "UPDATE DICTIONARY_USER SET dictionary_date = ? where user_id = ?;";
+        PreparedStatement ps = con.prepareStatement(query);
+        ps.setString(1,ac.toString());
+        ps.setInt(2,user_id);
+    }
+    /**
+     * Database.get_dictionary_date()
+     * @return String
+     * Returns date of the dictionary update
+     */
+    String get_dictionary_date() throws SQLException{
+        String query = "SELECT dictionary_date from DICTIONARY_USER where user_id = ?;";
+        PreparedStatement ps = con.prepareStatement(query);
+        ps.setInt(1,user_id);
+        ResultSet rs = ps.executeQuery();
+        
+        if (rs.next()){
+            return rs.getString("dictionary_date");
+        }
+        return null;
+    }
+    
+    /**
+     * Database.offload_dictionary(DictReader to_offload)
+     * @param to_offload
+     * @throws SQLException 
+     * Function for adding dictionary
+     */
+    void offload_dictionary(DictReader to_offload) throws SQLException{
+        if ( get_dictionary_id() == -1 ){
+            System.out.println("There is no user dictionary. Adding one...");
+            Date actual_date = new Date();
+            String query = "INSERT INTO DICTIONARY_USER\n"
+                    + "(user_id,dictionary_date)\n"
+                    + "VALUES\n"
+                    + "(?,?);";
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1,user_id);
+            ps.setString(2,actual_date.toString());
+            ps.execute();
+            System.out.println("QUERY: "+ps.toString());
+        }
+        int dictionary_id = get_dictionary_id();
+        update_dictionary_date();
+        for(String klucz:  to_offload.klucze){
+            int index = to_offload.klucze.indexOf(klucz);
+            for (String wartosc : to_offload.wartosci.get(index)){
+                klucz = klucz.substring(1);
+                add_element(klucz,wartosc,dictionary_id,"");
+            }
+        }
     }
 }

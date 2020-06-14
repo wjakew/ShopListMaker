@@ -5,6 +5,7 @@
  */
 package shoplistmaker;
 
+import java.sql.SQLException;
 import javax.swing.DefaultListModel;
 
 /**
@@ -21,12 +22,13 @@ public class dictionary_window extends javax.swing.JDialog {
     /**
      * Creates new form dictionary_window
      */
-    public dictionary_window(java.awt.Frame parent, boolean modal,InfoHandler p_info,DictReader d_reader) {
+    public dictionary_window(java.awt.Frame parent, boolean modal,InfoHandler p_info,DictReader d_reader) throws SQLException {
         super(parent, modal);
         dictionary = d_reader;
         info_handler = p_info;
         initComponents();
         prepare_stats(dictionary);
+        prepare_labels();
         dictionarystats_list.setModel(lista_model);
         setLocationRelativeTo(null);
         setVisible(true);
@@ -36,7 +38,18 @@ public class dictionary_window extends javax.swing.JDialog {
     void prepare_stats(DictReader to_make_stats){
         lista_model = new DefaultListModel<>();
         lista_model.addElement("Amount of keys: "+Integer.toString(to_make_stats.klucze.size()));
-        lista_model.addElement("Amout of elements: "+Integer.toString(to_make_stats.amount_of_wartosci));
+        lista_model.addElement("Amount of elements: "+Integer.toString(to_make_stats.amount_of_wartosci));
+    }
+    
+    void prepare_labels() throws SQLException{
+        if ( info_handler.actual.get_dictionary_id()!= -1){
+            jLabel3.setText("Amount of values: "+Integer.toString(info_handler.actual.get_amount_of_values()));
+            jLabel4.setText("Last update: "+ info_handler.actual.get_dictionary_date());
+        }
+        else{
+            jLabel3.setText("No dictionary data on the database");
+        }
+        
     }
     
 
@@ -55,8 +68,12 @@ public class dictionary_window extends javax.swing.JDialog {
         button_load = new javax.swing.JButton();
         button_offload = new javax.swing.JButton();
         button_share = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Dictionary Maintanance");
 
         jLabel1.setText("My Dictionary:");
 
@@ -73,6 +90,12 @@ public class dictionary_window extends javax.swing.JDialog {
 
         button_share.setText("Share dictionary");
 
+        jLabel2.setText("Database:");
+
+        jLabel3.setText("jLabel3");
+
+        jLabel4.setText("jLabel4");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -83,25 +106,35 @@ public class dictionary_window extends javax.swing.JDialog {
                     .addComponent(jScrollPane1)
                     .addComponent(button_load, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(button_offload, javax.swing.GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE)
+                    .addComponent(button_share, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(button_share, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(38, 38, 38)
+                .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(button_load, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(button_offload, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(button_share)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel4)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -115,6 +148,9 @@ public class dictionary_window extends javax.swing.JDialog {
     private javax.swing.JButton button_share;
     private javax.swing.JList<String> dictionarystats_list;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

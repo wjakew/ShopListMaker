@@ -28,7 +28,7 @@ public class DictReader {
     //zawiera wartosci slownika
     public ArrayList<ArrayList<String>> wartosci = new ArrayList<>();
     public int amount_of_wartosci = 0;
-    //zawiera klucze slownika<
+    //zawiera klucze slownika
     public ArrayList<String> klucze = new ArrayList<>();
     //dane slownika sa zarzadzane poprzez indeksy poszczegolnych kluczy
     
@@ -270,6 +270,20 @@ public class DictReader {
             System.out.println(klucz);
         }
         System.out.println("Zakonczylem wypisywanie slownika");
+    }
+    /**
+     * DictReader.show_dictionary()
+     * Function for showing dictionary
+     */
+    void show_dictionary(){
+        System.out.println("Wypisuje slownik:");
+        for(String klucz:  klucze){
+            System.out.println("Klucz: "+klucz);
+            int index = klucze.indexOf(klucz);
+            for (String wartosc : wartosci.get(index)){
+                System.out.println("    "+wartosc);
+            }
+        }
     }
     
     void show_wartosci(){

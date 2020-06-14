@@ -52,7 +52,7 @@ public class ustawienia_window extends javax.swing.JDialog {
         wyslij_slownik_button = new javax.swing.JButton();
         podglad_button = new javax.swing.JButton();
         merge_dictionaries_button = new javax.swing.JButton();
-        database_login_button = new javax.swing.JButton();
+        button_showdictionary = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -94,11 +94,16 @@ public class ustawienia_window extends javax.swing.JDialog {
         });
 
         merge_dictionaries_button.setText("Merge dictionaries");
-
-        database_login_button.setText("Login to database");
-        database_login_button.addActionListener(new java.awt.event.ActionListener() {
+        merge_dictionaries_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                database_login_buttonActionPerformed(evt);
+                merge_dictionaries_buttonActionPerformed(evt);
+            }
+        });
+
+        button_showdictionary.setText("Show dictionary");
+        button_showdictionary.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_showdictionaryActionPerformed(evt);
             }
         });
 
@@ -108,16 +113,16 @@ public class ustawienia_window extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(62, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(wyslij_slownik_button, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(database_login_button, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(merge_dictionaries_button, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(wyslij_slownik_button, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(podglad_button)
                         .addGap(30, 30, 30)
-                        .addComponent(mod_sciezka_button, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(mod_sciezka_button, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(merge_dictionaries_button, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(button_showdictionary, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(68, 68, 68))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -148,13 +153,13 @@ public class ustawienia_window extends javax.swing.JDialog {
                     .addComponent(jLabel2)
                     .addComponent(podglad_button)
                     .addComponent(mod_sciezka_button))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(database_login_button)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(wyslij_slownik_button)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(button_showdictionary)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(merge_dictionaries_button)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -208,13 +213,18 @@ public class ustawienia_window extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_wyslij_slownik_buttonActionPerformed
 
-    private void database_login_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_database_login_buttonActionPerformed
-        JOptionPane.showMessageDialog(this, "This function will be added in the future update");
-    }//GEN-LAST:event_database_login_buttonActionPerformed
+    private void button_showdictionaryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_showdictionaryActionPerformed
+        DictReader d = new DictReader("",program_info);
+        d.show_dictionary();
+    }//GEN-LAST:event_button_showdictionaryActionPerformed
+
+    private void merge_dictionaries_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_merge_dictionaries_buttonActionPerformed
+        JOptionPane.showMessageDialog(this, "Functionality gonna be added in the next update");
+    }//GEN-LAST:event_merge_dictionaries_buttonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton database_login_button;
+    private javax.swing.JButton button_showdictionary;
     private javax.swing.JLabel imie_label;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
