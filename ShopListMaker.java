@@ -29,15 +29,26 @@ public class ShopListMaker {
      */
     static InfoHandler act;
     
+    static Database actual;
+    
     static int test = 0;
     
     public static void main(String[] args) throws FileNotFoundException {
+        actual = new Database();
+                
+        if (actual.connected){
+            JOptionPane.showMessageDialog(null, "Database connected");
+            }
+        else{
+            JOptionPane.showMessageDialog(null, "Unable to connect to the database");
+            }
         
         if(test == 1){//warunek dla testowania kodu
 
         }
         else{
         if(!new File("config_file.txt").exists()) { 
+                
                 JFileChooser myFileChooser = new JFileChooser();
                 myFileChooser.setDialogTitle("No dictionary file. - Choose it:");
 
@@ -49,7 +60,7 @@ public class ShopListMaker {
                         //act.dict_path=path;
                         
                         act = new InfoHandler();
-
+                        act.add_database(actual);
                         Config act_config = new Config(act);
 
                         act.lg=1;
@@ -79,6 +90,7 @@ public class ShopListMaker {
                 act.lg=1;
                 
                 act.dict_path = act_config.get_dict_path();
+                act.add_database(actual);
                 File test = new File(act_config.get_dict_path());
                 if(test.exists()){
                     System.out.println(act.get_config().get_dict_path());

@@ -26,9 +26,10 @@ import java.util.Iterator;
 public class DictReader {
     
     //zawiera wartosci slownika
-    private ArrayList<ArrayList<String>> wartosci = new ArrayList<>();
-    //zawiera klucze slownika
-    private ArrayList<String> klucze = new ArrayList<>();
+    public ArrayList<ArrayList<String>> wartosci = new ArrayList<>();
+    public int amount_of_wartosci = 0;
+    //zawiera klucze slownika<
+    public ArrayList<String> klucze = new ArrayList<>();
     //dane slownika sa zarzadzane poprzez indeksy poszczegolnych kluczy
     
     //zawiera wartosci slownika zapisane w hashsetach
@@ -95,6 +96,7 @@ public class DictReader {
                for(int i=L_zrozumianeslowa.indexOf(linia)+1;i<L_zrozumianeslowa.size()-1;i++){
                    if(L_zrozumianeslowa.get(i).startsWith("%")==false){
                      chwilowa.add(L_zrozumianeslowa.get(i));
+                     amount_of_wartosci++;
                    }
                    else{
                        break;

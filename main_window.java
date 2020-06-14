@@ -47,8 +47,12 @@ public class main_window extends javax.swing.JFrame implements WindowListener {
         lista_model = new DefaultListModel<>();
         lista_zakupow = new ArrayList<>();
         
+        
         initComponents();
         setLocationRelativeTo(null);
+        
+        update_database_menu();
+        
         setVisible(true);
     }
     
@@ -57,6 +61,34 @@ public class main_window extends javax.swing.JFrame implements WindowListener {
         for(String element: lista_zakupow){
             lista_model.addElement(element);
         }
+    }
+    
+    /**
+     * main_window.update_database_menu()
+     * Function for updating labels and enables buttons in database menu
+     */
+    void update_database_menu(){
+        if ( program_info.actual.connected ){
+            database_label.setText("Database ready to log in!");
+            
+            if ( program_info.actual.logged_as_user){
+                database_login.setText("Log out");
+                database_dictionary.setEnabled(true);
+                database_myshoplists.setEnabled(true);
+                database_label.setText("Logged as: "+program_info.actual.user_login);
+            }
+            else{
+                database_login.setText("Log in");
+                database_dictionary.setEnabled(false);
+                database_myshoplists.setEnabled(false);
+                database_label.setText("Database ready to log in!");
+            }
+        }
+        else{
+            database_login.setEnabled(false);
+            database_label.setText("Unable to connect to database");
+        }
+        
     }
 
     /**
@@ -75,11 +107,16 @@ public class main_window extends javax.swing.JFrame implements WindowListener {
         usun_button = new javax.swing.JButton();
         gotowe_button = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        database_label = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         menu_category_menu = new javax.swing.JMenu();
         zapisz_liste_menu = new javax.swing.JMenuItem();
         otworz_liste_menu = new javax.swing.JMenuItem();
         wyczysc_menu_item = new javax.swing.JMenuItem();
+        database_menu = new javax.swing.JMenu();
+        database_login = new javax.swing.JMenuItem();
+        database_dictionary = new javax.swing.JMenuItem();
+        database_myshoplists = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         usun_element_jmenu = new javax.swing.JMenuItem();
         generuj_wynik_jmenu = new javax.swing.JMenuItem();
@@ -130,9 +167,11 @@ public class main_window extends javax.swing.JFrame implements WindowListener {
 
         jLabel1.setText("Your shopping list:");
 
+        database_label.setText("jLabel2");
+
         menu_category_menu.setText("Menu");
 
-        zapisz_liste_menu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.META_MASK));
+        zapisz_liste_menu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.META_DOWN_MASK));
         zapisz_liste_menu.setText("Save list");
         zapisz_liste_menu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -141,7 +180,7 @@ public class main_window extends javax.swing.JFrame implements WindowListener {
         });
         menu_category_menu.add(zapisz_liste_menu);
 
-        otworz_liste_menu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.META_MASK));
+        otworz_liste_menu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.META_DOWN_MASK));
         otworz_liste_menu.setText("Open list");
         otworz_liste_menu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -150,7 +189,7 @@ public class main_window extends javax.swing.JFrame implements WindowListener {
         });
         menu_category_menu.add(otworz_liste_menu);
 
-        wyczysc_menu_item.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_W, java.awt.event.InputEvent.META_MASK));
+        wyczysc_menu_item.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_W, java.awt.event.InputEvent.META_DOWN_MASK));
         wyczysc_menu_item.setText("Clear list");
         wyczysc_menu_item.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -161,9 +200,32 @@ public class main_window extends javax.swing.JFrame implements WindowListener {
 
         jMenuBar1.add(menu_category_menu);
 
+        database_menu.setText("Database");
+
+        database_login.setText("Log in");
+        database_login.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                database_loginActionPerformed(evt);
+            }
+        });
+        database_menu.add(database_login);
+
+        database_dictionary.setText("Dictionary ");
+        database_dictionary.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                database_dictionaryActionPerformed(evt);
+            }
+        });
+        database_menu.add(database_dictionary);
+
+        database_myshoplists.setText("My Shop lists");
+        database_menu.add(database_myshoplists);
+
+        jMenuBar1.add(database_menu);
+
         jMenu1.setText("Actions");
 
-        usun_element_jmenu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.META_MASK));
+        usun_element_jmenu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.META_DOWN_MASK));
         usun_element_jmenu.setText("Delete Element");
         usun_element_jmenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -172,7 +234,7 @@ public class main_window extends javax.swing.JFrame implements WindowListener {
         });
         jMenu1.add(usun_element_jmenu);
 
-        generuj_wynik_jmenu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.META_MASK));
+        generuj_wynik_jmenu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.META_DOWN_MASK));
         generuj_wynik_jmenu.setText("Generate result");
         generuj_wynik_jmenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -235,7 +297,10 @@ public class main_window extends javax.swing.JFrame implements WindowListener {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(gotowe_button, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE))
-                        .addContainerGap())))
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(database_label)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -245,17 +310,19 @@ public class main_window extends javax.swing.JFrame implements WindowListener {
                 .addGap(5, 5, 5)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(dodaj_button)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(usun_button))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(3, 3, 3)
-                        .addComponent(field_dodaj, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)))
-                .addGap(18, 18, 18)
-                .addComponent(gotowe_button, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)
-                .addGap(6, 6, 6))
+                        .addComponent(field_dodaj)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(gotowe_button, javax.swing.GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE)
+                .addGap(27, 27, 27)
+                .addComponent(database_label)
+                .addContainerGap())
         );
 
         pack();
@@ -428,9 +495,30 @@ public class main_window extends javax.swing.JFrame implements WindowListener {
         new ustawienia_window(this,true,program_info);
     }//GEN-LAST:event_ustawienia_jMenuActionPerformed
 
+    private void database_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_database_loginActionPerformed
+        if( program_info.actual.logged_as_user ){
+            program_info.actual.log_out();
+            update_database_menu();
+        }
+        else{
+            new login_window(this,true,program_info);
+            update_database_menu();
+        }
+    }//GEN-LAST:event_database_loginActionPerformed
+
+    private void database_dictionaryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_database_dictionaryActionPerformed
+        DictReader d = new DictReader("",program_info);
+        new dictionary_window(this,true,program_info,d);
+    }//GEN-LAST:event_database_dictionaryActionPerformed
+
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem database_dictionary;
+    private javax.swing.JLabel database_label;
+    private javax.swing.JMenuItem database_login;
+    private javax.swing.JMenu database_menu;
+    private javax.swing.JMenuItem database_myshoplists;
     private javax.swing.JButton dodaj_button;
     private javax.swing.JTextField field_dodaj;
     private javax.swing.JMenuItem generuj_wynik_jmenu;
