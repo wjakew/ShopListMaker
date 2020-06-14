@@ -16,6 +16,7 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -508,7 +509,11 @@ public class main_window extends javax.swing.JFrame implements WindowListener {
 
     private void database_dictionaryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_database_dictionaryActionPerformed
         DictReader d = new DictReader("",program_info);
-        new dictionary_window(this,true,program_info,d);
+        try {
+            new dictionary_window(this,true,program_info,d);
+        } catch (SQLException ex) {
+            Logger.getLogger(main_window.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_database_dictionaryActionPerformed
 
     

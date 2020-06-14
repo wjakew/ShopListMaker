@@ -28,6 +28,7 @@ public class ustawienia_window extends javax.swing.JDialog {
         program_info = act_inf;
         
         initComponents();
+        jLabel4.setText(program_info.version);
         setLocationRelativeTo(null);
         imie_label.setText(act_inf.to_pass.get_imie());
         
@@ -48,13 +49,14 @@ public class ustawienia_window extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         mod_imie_button = new javax.swing.JButton();
         mod_sciezka_button = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
         wyslij_slownik_button = new javax.swing.JButton();
         podglad_button = new javax.swing.JButton();
         merge_dictionaries_button = new javax.swing.JButton();
         button_showdictionary = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("SLM Settings");
 
         jLabel1.setText("Your Name");
 
@@ -75,9 +77,6 @@ public class ustawienia_window extends javax.swing.JDialog {
                 mod_sciezka_buttonActionPerformed(evt);
             }
         });
-
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel3.setText("SLM SETTINGS");
 
         wyslij_slownik_button.setText("Send your dictionary");
         wyslij_slownik_button.addActionListener(new java.awt.event.ActionListener() {
@@ -107,48 +106,43 @@ public class ustawienia_window extends javax.swing.JDialog {
             }
         });
 
+        jLabel4.setText("jLabel4");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(62, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(wyslij_slownik_button, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(podglad_button)
-                        .addGap(30, 30, 30)
-                        .addComponent(mod_sciezka_button, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(merge_dictionaries_button, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(button_showdictionary, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(68, 68, 68))
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(71, 71, 71)
-                        .addComponent(jLabel1)
-                        .addGap(19, 19, 19)
-                        .addComponent(imie_label)
-                        .addGap(31, 31, 31)
-                        .addComponent(mod_imie_button, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel3)))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel1)
+                            .addGap(94, 94, 94)
+                            .addComponent(imie_label)
+                            .addGap(43, 43, 43)
+                            .addComponent(mod_imie_button, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel2)
+                            .addGap(18, 18, 18)
+                            .addComponent(podglad_button)
+                            .addGap(18, 18, 18)
+                            .addComponent(mod_sciezka_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(wyslij_slownik_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(button_showdictionary, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(merge_dictionaries_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel4))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jLabel3)
-                .addGap(34, 34, 34)
+                .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(imie_label)
                     .addComponent(mod_imie_button))
-                .addGap(36, 36, 36)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(podglad_button)
@@ -159,7 +153,9 @@ public class ustawienia_window extends javax.swing.JDialog {
                 .addComponent(button_showdictionary)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(merge_dictionaries_button)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel4)
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         pack();
@@ -215,7 +211,7 @@ public class ustawienia_window extends javax.swing.JDialog {
 
     private void button_showdictionaryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_showdictionaryActionPerformed
         DictReader d = new DictReader("",program_info);
-        d.show_dictionary();
+        new showdictionary_window(null,true,d);
     }//GEN-LAST:event_button_showdictionaryActionPerformed
 
     private void merge_dictionaries_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_merge_dictionaries_buttonActionPerformed
@@ -228,7 +224,7 @@ public class ustawienia_window extends javax.swing.JDialog {
     private javax.swing.JLabel imie_label;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JButton merge_dictionaries_button;
     private javax.swing.JButton mod_imie_button;
     private javax.swing.JButton mod_sciezka_button;

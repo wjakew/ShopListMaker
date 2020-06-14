@@ -1,12 +1,16 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+JAKUB WAWAK
+ALL RIGHTS RESERVED.
+kubawawak@gmail.com
  */
 package shoplistmaker;
 
+import java.io.FileNotFoundException;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -24,21 +28,30 @@ public class dictionary_window extends javax.swing.JDialog {
      */
     public dictionary_window(java.awt.Frame parent, boolean modal,InfoHandler p_info,DictReader d_reader) throws SQLException {
         super(parent, modal);
-        dictionary = d_reader;
+        dictionary = p_info.dictionary;
         info_handler = p_info;
         initComponents();
-        prepare_stats(dictionary);
+        prepare_stats();
         prepare_labels();
-        dictionarystats_list.setModel(lista_model);
         setLocationRelativeTo(null);
         setVisible(true);
     }
     
     
-    void prepare_stats(DictReader to_make_stats){
+    void prepare_stats(){
         lista_model = new DefaultListModel<>();
-        lista_model.addElement("Amount of keys: "+Integer.toString(to_make_stats.klucze.size()));
-        lista_model.addElement("Amount of elements: "+Integer.toString(to_make_stats.amount_of_wartosci));
+        if ( dictionary.location == 0){
+            lista_model.addElement("Local dictionary");
+            savelocal_button.setVisible(false);
+        }
+        else{
+            lista_model.addElement("Dictionary from database");
+            savelocal_button.setVisible(true);
+            
+        }
+        lista_model.addElement("Amount of keys: "+Integer.toString(dictionary.klucze.size()));
+        lista_model.addElement("Amount of elements: "+Integer.toString(dictionary.amount_of_wartosci));
+        dictionarystats_list.setModel(lista_model);
     }
     
     void prepare_labels() throws SQLException{
@@ -71,6 +84,8 @@ public class dictionary_window extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        button_showdictionary = new javax.swing.JButton();
+        savelocal_button = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Dictionary Maintanance");
@@ -85,8 +100,18 @@ public class dictionary_window extends javax.swing.JDialog {
         jScrollPane1.setViewportView(dictionarystats_list);
 
         button_load.setText("Load to the database");
+        button_load.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_loadActionPerformed(evt);
+            }
+        });
 
         button_offload.setText("Load from the database");
+        button_offload.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_offloadActionPerformed(evt);
+            }
+        });
 
         button_share.setText("Share dictionary");
 
@@ -95,6 +120,20 @@ public class dictionary_window extends javax.swing.JDialog {
         jLabel3.setText("jLabel3");
 
         jLabel4.setText("jLabel4");
+
+        button_showdictionary.setText("Show dictionary");
+        button_showdictionary.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_showdictionaryActionPerformed(evt);
+            }
+        });
+
+        savelocal_button.setText("Save local");
+        savelocal_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                savelocal_buttonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -107,13 +146,15 @@ public class dictionary_window extends javax.swing.JDialog {
                     .addComponent(button_load, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(button_offload, javax.swing.GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE)
                     .addComponent(button_share, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(button_showdictionary, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel1)
                             .addComponent(jLabel3)
                             .addComponent(jLabel4))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(savelocal_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -122,7 +163,9 @@ public class dictionary_window extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(button_showdictionary, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(button_load, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -135,22 +178,64 @@ public class dictionary_window extends javax.swing.JDialog {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(savelocal_button)
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void button_loadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_loadActionPerformed
+        try {
+            info_handler.actual.offload_dictionary(dictionary);
+            prepare_labels();
+            JOptionPane.showMessageDialog(this, "Dictionary on the database was updated");
+        } catch (SQLException ex) {
+            Logger.getLogger(dictionary_window.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_button_loadActionPerformed
+
+    private void button_offloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_offloadActionPerformed
+        try {
+            dictionary = info_handler.actual.load_dictionary();
+            prepare_stats();
+            prepare_labels();
+        } catch (SQLException ex) {
+            Logger.getLogger(dictionary_window.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_button_offloadActionPerformed
+
+    private void button_showdictionaryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_showdictionaryActionPerformed
+        new showdictionary_window(null,true,dictionary);
+    }//GEN-LAST:event_button_showdictionaryActionPerformed
+
+    private void savelocal_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_savelocal_buttonActionPerformed
+        try {
+            dictionary.save_dict();
+            JOptionPane.showMessageDialog(this, "Dictionary saved local");
+            dictionary = new DictReader("",info_handler);
+            prepare_stats();
+            prepare_labels();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(dictionary_window.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(dictionary_window.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_savelocal_buttonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton button_load;
     private javax.swing.JButton button_offload;
     private javax.swing.JButton button_share;
+    private javax.swing.JButton button_showdictionary;
     private javax.swing.JList<String> dictionarystats_list;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton savelocal_button;
     // End of variables declaration//GEN-END:variables
 }

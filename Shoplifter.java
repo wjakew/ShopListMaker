@@ -57,7 +57,7 @@ public class Shoplifter {
         brak_kategorii = new ArrayList<>();
   
         info = inf;
-        dict = new DictReader("",info);
+        dict = info.dictionary;
         to_do = shop;
         
         for(String element_listy : shop){

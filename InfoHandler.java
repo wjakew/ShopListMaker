@@ -11,18 +11,19 @@ package shoplistmaker;
  */
 public class InfoHandler {
     
-    String version = "v.1.4.0beta2";
+    String version = "v.1.4.0beta3";
     Shoplifter act_cart;
     int lg = 0;
     String dict_path = "";
     int mode = 0;
     Database actual;
-    
+    DictReader dictionary;
     Config to_pass;
     
     InfoHandler(){
         act_cart=null;
         to_pass = null;
+        dictionary = new DictReader("",this);
     }
     
     void dic(String src){

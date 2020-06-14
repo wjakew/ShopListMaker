@@ -10,6 +10,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -276,10 +277,45 @@ public class Database {
         update_dictionary_date();
         for(String klucz:  to_offload.klucze){
             int index = to_offload.klucze.indexOf(klucz);
+            klucz = klucz.substring(1);
             for (String wartosc : to_offload.wartosci.get(index)){
-                klucz = klucz.substring(1);
                 add_element(klucz,wartosc,dictionary_id,"");
             }
         }
     }
+    
+    /**
+     * Database.load_dictionary()
+     * @throws SQLException 
+     * @return DictReader
+     * Loading dictionary from database
+     */
+    DictReader load_dictionary() throws SQLException{
+        ArrayList<String> keys = new ArrayList<>();
+        ArrayList<ArrayList<String>> values = new ArrayList<>();
+        
+        String query = "SELECT * from CATEGORY;";
+        PreparedStatement ps = con.prepareStatement(query);
+        ResultSet rs = ps.executeQuery();
+        
+        while ( rs.next() ){    // looping on categories
+            int index = rs.getInt("category_id");
+            String category_name = "%"+rs.getString("category_name");
+            keys.add(category_name);
+            String element_query = "SELECT * FROM ELEMENT WHERE category_id = ? and user_id = ?";
+            PreparedStatement ps_element = con.prepareStatement(element_query);
+            
+            ps_element.setInt(1, index);
+            ps_element.setInt(2,user_id);
+            
+            ResultSet rs_element = ps_element.executeQuery();   // setting query for each of the categories 
+            ArrayList<String> rotate_value = new ArrayList<>();
+            
+            while ( rs_element.next() ){ // looping on element database
+                rotate_value.add(rs_element.getString("element_name"));
+            }
+            values.add(rotate_value);
+            }
+        return new DictReader(keys,values);
+        }
 }

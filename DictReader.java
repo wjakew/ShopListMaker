@@ -25,6 +25,8 @@ import java.util.Iterator;
  */
 public class DictReader {
     
+    public String version = "v2.0.0";
+    
     //zawiera wartosci slownika
     public ArrayList<ArrayList<String>> wartosci = new ArrayList<>();
     public int amount_of_wartosci = 0;
@@ -47,12 +49,44 @@ public class DictReader {
     //funkcja ktora operuje gdy wartosc klucza jest pojedyncza
     int single_mode = 0;
     
+    // 0 - z pliku, 1 - inna lokalizacja
+    int location = -1;
+    
+    DictReader(ArrayList<String> keys,ArrayList<ArrayList<String>> values){
+        System.out.println("DICT READER: LADOWANIE SLOWNIKA z BAZY DANYCH");
+        klucze = keys;
+        wartosci = values;
+        location = 1;
+        amount_of_wartosci = count_elements();
+        dict_src = "dict_from_database.txt";
+    }
+    /**
+     * DictReader.count_elements()
+     * @return Integer
+     * Returns amount of elements in wartosci collection
+     */
+    int count_elements(){
+        int count = 0;
+        for (ArrayList<String> a : wartosci){
+            count = count + a.size();
+        }
+        return count;
+    }
+    /**
+     * DictReader.merge(DictReader to_merge)
+     * @param to_merge 
+     * Function for merging dictionaries
+     */
+    void merge(DictReader to_merge){
+        
+    }
+    
     /**
      * Konstruktor DictReader.
      * Tworzy obiekt zawierajacy dane slownika.
      */
     DictReader(String src,InfoHandler act){
-        
+        location = 0;
         if(!src.equals("")){
             dict_src = src;
         }
@@ -275,15 +309,16 @@ public class DictReader {
      * DictReader.show_dictionary()
      * Function for showing dictionary
      */
-    void show_dictionary(){
-        System.out.println("Wypisuje slownik:");
+    ArrayList<String> show_dictionary(){
+        ArrayList<String> lines = new ArrayList<>();
         for(String klucz:  klucze){
-            System.out.println("Klucz: "+klucz);
+           lines.add("Klucz: "+klucz);
             int index = klucze.indexOf(klucz);
             for (String wartosc : wartosci.get(index)){
-                System.out.println("    "+wartosc);
+                lines.add("    "+wartosc);
             }
         }
+        return lines;
     }
     
     void show_wartosci(){
