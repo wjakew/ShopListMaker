@@ -30,10 +30,13 @@ public class Database {
     ResultSet rs = null;
     
     // main constructor
-    Database (){
+    Database () throws ClassNotFoundException, InstantiationException, IllegalAccessException{
         try{
-            con = DriverManager.getConnection("jdbc:mysql://localhost/shoplistmaker_database?" +
-                                   "user=root&password=password");
+            String url="jdbc:mysql://localhost:3306/shoplistmaker_database";
+            String username="root";
+            String password="password";
+            Class.forName("com.mysql.jdbc.Driver").newInstance();
+            con = DriverManager.getConnection(url,username,password);
             System.out.println("Connected: "+con.toString());
             connected = true;
         }catch(SQLException ex){
@@ -172,6 +175,7 @@ public class Database {
             return false;
         }
     }
+
     /**
      * Database.add_element(String key,String value,int dictionary_id,String note)
      * @param key

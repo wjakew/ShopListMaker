@@ -33,6 +33,10 @@ public class generacja_window extends javax.swing.JDialog {
         panel_tekstowy.setText(info.act_cart.make_list());
         setLocationRelativeTo(null);
         setVisible(true);
+        
+        if ( info.to_the_database ){
+            
+        }
     }
     
     String get_list(){

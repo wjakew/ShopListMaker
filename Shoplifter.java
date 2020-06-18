@@ -23,7 +23,7 @@ public class Shoplifter {
         chemia = index 5
         zdrowezyienie = index 6
         nabial = index 7
-        inee = index 8
+        inne = index 8
     */
     ArrayList<String> warzywaiowoce;
     ArrayList<String> napoje;

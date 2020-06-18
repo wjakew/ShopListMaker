@@ -65,11 +65,26 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="database_dictionaryActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="database_myshoplists">
+            <Menu class="javax.swing.JMenu" name="myshoplist_menu">
               <Properties>
-                <Property name="text" type="java.lang.String" value="My Shop lists"/>
+                <Property name="text" type="java.lang.String" value="My Shop Lists"/>
               </Properties>
-            </MenuItem>
+              <SubComponents>
+                <MenuItem class="javax.swing.JMenuItem" name="sendtodatabase_myshoplists_button">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Send to database"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sendtodatabase_myshoplists_buttonActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="manage_database_myshoplists">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Manage"/>
+                  </Properties>
+                </MenuItem>
+              </SubComponents>
+            </Menu>
           </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu1">

@@ -12,6 +12,8 @@ import java.util.logging.Logger;
 import javax.mail.MessagingException;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import static shoplistmaker.ShopListMaker.act;
+import static shoplistmaker.ShopListMaker.actual;
 
 /**
  *
@@ -215,7 +217,32 @@ public class ustawienia_window extends javax.swing.JDialog {
     }//GEN-LAST:event_button_showdictionaryActionPerformed
 
     private void merge_dictionaries_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_merge_dictionaries_buttonActionPerformed
-        JOptionPane.showMessageDialog(this, "Functionality gonna be added in the next update");
+        JFileChooser myFileChooser = new JFileChooser();
+                myFileChooser.setDialogTitle("Choose dictionary file to merge");
+
+                if(myFileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION){
+                    String path = myFileChooser.getSelectedFile().getAbsolutePath();
+
+                    if(path.contains("dict")&&path.endsWith(".txt")){
+                        //act.lg=1;
+                        //act.dict_path=path;
+                        
+                        DictReader to_merge = new DictReader(path,program_info);
+                        
+                        program_info.dictionary.merge(to_merge);
+                        try {
+                            program_info.dictionary.save_dict();
+                        } catch (FileNotFoundException ex) {
+                            Logger.getLogger(ustawienia_window.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(this,"There isn't dictionary file!");
+                    }       
+                }
+                else{
+                    JOptionPane.showMessageDialog(this, "Merging procedure stopped");
+                }
     }//GEN-LAST:event_merge_dictionaries_buttonActionPerformed
 
 

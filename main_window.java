@@ -75,19 +75,22 @@ public class main_window extends javax.swing.JFrame implements WindowListener {
             if ( program_info.actual.logged_as_user){
                 database_login.setText("Log out");
                 database_dictionary.setEnabled(true);
-                database_myshoplists.setEnabled(true);
+                myshoplist_menu.setEnabled(true);
                 database_label.setText("Logged as: "+program_info.actual.user_login);
             }
             else{
                 database_login.setText("Log in");
                 database_dictionary.setEnabled(false);
-                database_myshoplists.setEnabled(false);
+                myshoplist_menu.setEnabled(false);
                 database_label.setText("Database ready to log in!");
             }
         }
         else{
             database_login.setEnabled(false);
             database_label.setText("Unable to connect to database");
+            database_login.setEnabled(false);
+            database_dictionary.setEnabled(false);
+            myshoplist_menu.setEnabled(false);
         }
         
     }
@@ -117,7 +120,9 @@ public class main_window extends javax.swing.JFrame implements WindowListener {
         database_menu = new javax.swing.JMenu();
         database_login = new javax.swing.JMenuItem();
         database_dictionary = new javax.swing.JMenuItem();
-        database_myshoplists = new javax.swing.JMenuItem();
+        myshoplist_menu = new javax.swing.JMenu();
+        sendtodatabase_myshoplists_button = new javax.swing.JMenuItem();
+        manage_database_myshoplists = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         usun_element_jmenu = new javax.swing.JMenuItem();
         generuj_wynik_jmenu = new javax.swing.JMenuItem();
@@ -219,8 +224,20 @@ public class main_window extends javax.swing.JFrame implements WindowListener {
         });
         database_menu.add(database_dictionary);
 
-        database_myshoplists.setText("My Shop lists");
-        database_menu.add(database_myshoplists);
+        myshoplist_menu.setText("My Shop Lists");
+
+        sendtodatabase_myshoplists_button.setText("Send to database");
+        sendtodatabase_myshoplists_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sendtodatabase_myshoplists_buttonActionPerformed(evt);
+            }
+        });
+        myshoplist_menu.add(sendtodatabase_myshoplists_button);
+
+        manage_database_myshoplists.setText("Manage");
+        myshoplist_menu.add(manage_database_myshoplists);
+
+        database_menu.add(myshoplist_menu);
 
         jMenuBar1.add(database_menu);
 
@@ -516,6 +533,12 @@ public class main_window extends javax.swing.JFrame implements WindowListener {
         }
     }//GEN-LAST:event_database_dictionaryActionPerformed
 
+    private void sendtodatabase_myshoplists_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendtodatabase_myshoplists_buttonActionPerformed
+       program_info.to_the_database = true;
+       JOptionPane.showMessageDialog(this, "Shop list gonna be added to the database");
+       sendtodatabase_myshoplists_button.setEnabled(false);
+    }//GEN-LAST:event_sendtodatabase_myshoplists_buttonActionPerformed
+
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -523,7 +546,6 @@ public class main_window extends javax.swing.JFrame implements WindowListener {
     private javax.swing.JLabel database_label;
     private javax.swing.JMenuItem database_login;
     private javax.swing.JMenu database_menu;
-    private javax.swing.JMenuItem database_myshoplists;
     private javax.swing.JButton dodaj_button;
     private javax.swing.JTextField field_dodaj;
     private javax.swing.JMenuItem generuj_wynik_jmenu;
@@ -535,9 +557,12 @@ public class main_window extends javax.swing.JFrame implements WindowListener {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JList<String> lista;
+    private javax.swing.JMenuItem manage_database_myshoplists;
     private javax.swing.JMenu menu_category_menu;
+    private javax.swing.JMenu myshoplist_menu;
     private javax.swing.JMenu opcje_category_menu;
     private javax.swing.JMenuItem otworz_liste_menu;
+    private javax.swing.JMenuItem sendtodatabase_myshoplists_button;
     private javax.swing.JCheckBoxMenuItem ustawienia_jMenu;
     private javax.swing.JButton usun_button;
     private javax.swing.JMenuItem usun_element_jmenu;

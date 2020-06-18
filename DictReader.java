@@ -73,12 +73,35 @@ public class DictReader {
         return count;
     }
     /**
+     * DictReader.compare(ArrayList<String> c1,ArrayList<String> c2)
+     * @param c1
+     * @param c2
+     * @return boolean
+     * Function for comparing two collections
+     */
+    boolean compare(ArrayList<String> c1, ArrayList<String> c2){
+        return c1.equals(c2);
+    }
+    /**
      * DictReader.merge(DictReader to_merge)
      * @param to_merge 
      * Function for merging dictionaries
      */
     void merge(DictReader to_merge){
-        
+        System.out.println("DICT READER: STARTED MERGING!");
+        for(ArrayList<String> wartosc : wartosci){
+            int index = wartosci.indexOf(wartosc);
+            ArrayList<String> actual_opposite = to_merge.wartosci.get(index);
+            if ( !wartosc.equals(actual_opposite) ){
+                for(String thing : actual_opposite){
+                    if ( !wartosc.contains(thing) ){
+                        wartosc.add(thing);
+                        System.out.println("DICT READER: MERGE ADDED ("+thing+") to your dictionary");
+                    }
+                }
+            }
+        }
+        System.out.println("DICT READER: MARGE DONE.");
     }
     
     /**
