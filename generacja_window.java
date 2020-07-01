@@ -8,6 +8,7 @@ package shoplistmaker;
 import java.awt.datatransfer.*;
 import java.awt.Toolkit;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.mail.MessagingException;
@@ -24,7 +25,7 @@ public class generacja_window extends javax.swing.JDialog {
      */
     InfoHandler info;
     
-    public generacja_window(java.awt.Frame parent, boolean modal,InfoHandler of) {
+    public generacja_window(java.awt.Frame parent, boolean modal,InfoHandler of) throws SQLException {
         super(parent, modal);
         info = of;
         
@@ -32,11 +33,16 @@ public class generacja_window extends javax.swing.JDialog {
         
         panel_tekstowy.setText(info.act_cart.make_list());
         setLocationRelativeTo(null);
-        setVisible(true);
+        
         
         if ( info.to_the_database ){
-            
+            info.actual.add_shoplist(info.act_cart);
+            jLabel2.setText("Already on the database");
         }
+        else{
+            jLabel2.setVisible(false);
+        }
+        setVisible(true);
     }
     
     String get_list(){
@@ -60,6 +66,7 @@ public class generacja_window extends javax.swing.JDialog {
         zamknij = new javax.swing.JButton();
         copy = new javax.swing.JButton();
         send_via_email_button = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -88,6 +95,8 @@ public class generacja_window extends javax.swing.JDialog {
             }
         });
 
+        jLabel2.setText("jLabel2");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -95,19 +104,23 @@ public class generacja_window extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(copy, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addComponent(zamknij, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 335, Short.MAX_VALUE)
-                    .addComponent(send_via_email_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(send_via_email_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jLabel2)
+                        .addComponent(jLabel1)))
                 .addContainerGap(45, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(49, 49, 49)
+                .addGap(13, 13, 13)
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -155,6 +168,7 @@ public class generacja_window extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton copy;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextPane panel_tekstowy;
     private javax.swing.JButton send_via_email_button;

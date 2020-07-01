@@ -18,7 +18,7 @@ import java.util.Date;
  * @author jakub
  */
 public class Database {
-    String version = "v1.0.0";
+    String version = "v1.0.2";
     
     boolean logged_as_user = false;
     boolean connected = false;
@@ -35,6 +35,20 @@ public class Database {
             String url="jdbc:mysql://localhost:3306/shoplistmaker_database";
             String username="root";
             String password="password";
+            Class.forName("com.mysql.jdbc.Driver").newInstance();
+            con = DriverManager.getConnection(url,username,password);
+            System.out.println("Connected: "+con.toString());
+            connected = true;
+        }catch(SQLException ex){
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode()); 
+        }
+    }
+    
+    void optional_connection(String url,String username,String password) throws 
+            ClassNotFoundException, InstantiationException, IllegalAccessException{
+        try{
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             con = DriverManager.getConnection(url,username,password);
             System.out.println("Connected: "+con.toString());
@@ -174,6 +188,49 @@ public class Database {
             System.out.println(e.toString());
             return false;
         }
+    }
+    
+    boolean add_shoplist(Shoplifter cart) throws SQLException{
+        // first we have to sync dictionaries
+        offload_dictionary(cart.dict);
+        // in that moment we have synced all new stuff with database
+        ArrayList<String> items_id = new ArrayList<>();
+        for ( String value : cart.combine_collections()){
+            int index = item_id(value);
+            
+            if ( index != -1){
+               items_id.add(Integer.toString(index));
+            }
+        }
+        
+        // we have all ids in items_id collection
+        if ( !items_id.isEmpty() ){
+            String elements = items_id.toString();
+            elements = elements.substring(1, elements.length()-2);
+            System.out.println(elements);  
+        }
+        return false;
+    }
+    /**
+     * Database.item_id(String value)
+     * @param value
+     * @return Integer
+     * @throws SQLException 
+     * Returns database id of an item. If item didn\t exists returns -1
+     */
+    int item_id(String value) throws SQLException{
+        String query = "SELECT element_id FROM ELEMENT where element_name = ? and user_id = ?;";
+        PreparedStatement ps = con.prepareStatement(query);
+        
+        ps.setString(1, value);
+        ps.setInt(2,user_id);
+        
+        ResultSet rs = ps.executeQuery();
+        
+        if ( rs.next() ){
+            return rs.getInt("element_id");
+        }
+        return -1;
     }
 
     /**

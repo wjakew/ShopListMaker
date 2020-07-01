@@ -5,6 +5,9 @@ kubawawak@gmail.com
  */
 package shoplistmaker;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
@@ -310,7 +313,11 @@ public class show_window extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void generacja_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generacja_buttonActionPerformed
-        new generacja_window(this,true,act);
+        try {
+            new generacja_window(this,true,act);
+        } catch (SQLException ex) {
+            Logger.getLogger(show_window.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_generacja_buttonActionPerformed
 
     private void cofnij_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cofnij_buttonActionPerformed

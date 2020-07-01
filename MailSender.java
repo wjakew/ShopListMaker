@@ -6,11 +6,9 @@ all rights reserved
 
 package shoplistmaker;
 import java.io.IOException;
-import static java.lang.ProcessBuilder.Redirect.to;
 import java.util.*;  
 import javax.mail.*;  
 import javax.mail.internet.*;  
-import javax.activation.*; 
 /**
  *MailSender object
  * @author jakub

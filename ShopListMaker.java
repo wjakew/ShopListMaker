@@ -7,15 +7,9 @@ package shoplistmaker;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -41,7 +35,18 @@ public class ShopListMaker {
             }
         else{
             JOptionPane.showMessageDialog(null, "Unable to connect to the database");
+            // database connector window
+            
+            new optional_database_window(null,true,act);
+            actual = act.actual;
+            
+            if (actual.connected){
+                JOptionPane.showMessageDialog(null,"Succesfully connected to the optional database");
             }
+            else{
+                JOptionPane.showMessageDialog(null, "Still unable to connect to the database");
+            }
+        }
         
         if(test == 1){//warunek dla testowania kodu
 

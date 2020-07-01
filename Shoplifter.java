@@ -62,6 +62,7 @@ public class Shoplifter {
         
         for(String element_listy : shop){
             decide(element_listy);
+            ret_lines_collection();
         }
     }
     Shoplifter(InfoHandler inf){
@@ -80,7 +81,42 @@ public class Shoplifter {
         info = inf;
         dict = new DictReader("",info);
     }
+    /**
+     * Shoplifter.ret_lines_collection()
+     * @return String
+     * Function for returning lines of collection for debug
+     */
+    String ret_lines_collection(){
+        String to_ret = "Actual content of collection: \n";
+        
+        ArrayList<String> combined = combine_collections();
+        
+        for(String line : combined){
+            to_ret = to_ret + line + "\n";
+        }
+        return to_ret;
+    }
     
+    /**
+     * Shoplifter.combine_collections()
+     * @return ArrayList
+     * Function for combining all result collections
+     */
+    ArrayList<String> combine_collections(){
+        ArrayList<String> to_ret = new ArrayList<>();
+        
+        to_ret.addAll(warzywaiowoce);
+        to_ret.addAll(napoje);
+        to_ret.addAll(przyprawy);
+        to_ret.addAll(pieczywo);
+        to_ret.addAll(przekaski);
+        to_ret.addAll(chemia);
+        to_ret.addAll(zdrowezywienie);
+        to_ret.addAll(nabial);
+        to_ret.addAll(inne);
+        
+        return to_ret;
+    }
     
     void decide(String element){
         ArrayList<String> old_znalezione = new ArrayList<String>();
